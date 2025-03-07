@@ -151,15 +151,18 @@
   .RR-logo {
     margin: 0px;
   }
-  .action_btn {
-    background-color: var(--primary-color);
-  }
+
   .action_btn:hover {
     background-color: var(--button-hover-color);
     color: var(--white-color);
   }
 }
 
+@media (max-width: 990px) {
+  .action_btn {
+    background-color: var(--primary-color);
+  }
+}
 .login_popup {
   position: fixed;
   top: 50%;

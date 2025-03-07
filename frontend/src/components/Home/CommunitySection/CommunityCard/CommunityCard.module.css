@@ -1,11 +1,10 @@
 .wrapper-grid {
-  display: inline-flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: var(--background-color);
-  width: 30%;
   border-radius: 1rem;
-  margin: 1rem 0.6rem 2.5rem 0.6rem;
+  margin: 20px 30px;
 }
 
 .wrapper-grid:hover {
@@ -15,12 +14,16 @@
 
 .card-container {
   width: 100%;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-items: space-between;
+  align-items: center;
 }
 
 .card-img {
-  flex: 1;
   position: relative;
+  justify-self: flex-start;
+  width: 100%;
 }
 
 .card-img:hover::after {
@@ -100,10 +103,10 @@
 
 .card-user {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   margin-left: 18px;
   margin-bottom: 15px;
+  align-self: end;
 }
 
 .card-user-img {

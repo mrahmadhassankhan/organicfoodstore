@@ -1,20 +1,37 @@
 .community-container {
-    background-color: var(--card-color);
-    margin: 40px auto 0px auto;
+  background-color: var(--card-color);
+  display: flex;
+  justify-content: center;
 }
 
 .community-title {
-    font-size: 2rem;
-    font-weight: bold;
-    padding-top: 2rem;
-    padding-bottom: 1rem;
-    text-align: center;
-    text-transform: capitalize;
+  font-size: 2rem;
+  font-weight: bold;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  text-align: center;
+  text-transform: capitalize;
+}
+.community-divs {
+  display: flex;
+  justify-content: center;
 }
 
-@media (max-width:550px) {
-    .community-container {
-        background-color: var(--card-color);
-        margin: 6px auto 0px auto;
-    }
+@media (max-width: 550px) {
+  .community-container {
+    background-color: var(--card-color);
+  }
+  .community-divs {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+}
+
+@media (min-width: 550px) and (max-width: 990px) {
+  .community-divs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
 }

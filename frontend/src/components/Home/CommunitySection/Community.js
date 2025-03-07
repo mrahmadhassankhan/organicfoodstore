@@ -38,19 +38,21 @@ const Community = () => {
   ];
 
   return (
-    <div className={`${CSS["community-container"]} container-fluid`}>
+    <div className={`${CSS["community-container"]}`}>
       <div className="container">
         <h1 className={CSS["community-title"]}>Join our Community</h1>
-        {CommunityMember.map((memberdata, index) => (
-          <CommunityCard
-            key={index}
-            title={memberdata.title}
-            subtitle={memberdata.subtitle}
-            memberName={memberdata.memberName}
-            memberImg={memberdata.memberImg}
-            communityImg={memberdata.communityImg}
-          />
-        ))}
+        <div className={CSS["community-divs"]}>
+          {CommunityMember.map((memberdata, index) => (
+            <CommunityCard
+              key={index}
+              title={memberdata.title}
+              subtitle={memberdata.subtitle}
+              memberName={memberdata.memberName}
+              memberImg={memberdata.memberImg}
+              communityImg={memberdata.communityImg}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
