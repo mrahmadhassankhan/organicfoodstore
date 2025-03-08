@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import CSS from './EditCategory.module.css';
-import GridLayout from '../../components/GridLayout';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState, useEffect } from "react";
+import CSS from "./EditCategory.module.css";
+import GridLayout from "../../components/GridLayout";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -24,8 +24,6 @@ const EditCategory = () => {
       .catch((err) => console.error(err));
   };
 
-
-
   const handleDeleteCategory = (categoryId) => {
     axios
       .delete(`http://localhost:1783/api/deletecategory/${categoryId}`)
@@ -40,24 +38,35 @@ const EditCategory = () => {
 
   return (
     <GridLayout>
-      <h1 className={CSS['addcategory-title']}>Edit your Category</h1>
-      <table className={CSS['table']}>
+      <h1 className={CSS["addcategory-title"]}>Edit your Category</h1>
+      <table className={CSS["table"]}>
         <thead>
           <tr>
-            <th className={CSS['table-head-row']}>Category Name</th>
-            <th className={CSS['table-head-row']}>Category Image</th>
-            <th className={`${CSS['table-head-row']} ${CSS['table-head-btn']}`}>Delete Category</th>
+            <th className={CSS["table-head-row"]}>Category Name</th>
+            <th className={CSS["table-head-row"]}>Category Image</th>
+            <th className={`${CSS["table-head-row"]} ${CSS["table-head-btn"]}`}>
+              Delete Category
+            </th>
           </tr>
         </thead>
         <tbody>
           {categories.map((list) => (
             <tr key={list._id}>
-              <td className={CSS['table-data']}>{list.categoryName}</td>
-              <td className={CSS['table-data']}>
-                <img src={`http://localhost:1783/Images/${list.categoryImage}`} alt={list.categoryName} width={'80px'} height={'80px'} />
+              <td className={CSS["table-data"]}>{list.categoryName}</td>
+              <td className={CSS["table-data"]}>
+                <img
+                  src={`http://localhost:1783/Images/${list.categoryImage}`}
+                  alt={list.categoryName}
+                  width={"80px"}
+                  height={"80px"}
+                />
               </td>
-              <td className={CSS['table-data']}>
-                <button className={CSS['table-data-delete-btn']} type='button' onClick={() => handleDeleteCategory(list._id)} >
+              <td className={CSS["table-data"]}>
+                <button
+                  className={CSS["table-data-delete-btn"]}
+                  type="button"
+                  onClick={() => handleDeleteCategory(list._id)}
+                >
                   Delete
                 </button>
               </td>

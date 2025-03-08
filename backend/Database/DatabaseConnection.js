@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const dbURI = "mongodb://localhost:27017/organicfoodstore";
+const dbURI = "mongodb://127.0.0.1/organicfoodstore";
 
 mongoose.connect(dbURI);
 const db = mongoose.connection;
