@@ -68,14 +68,13 @@ const CategoryFilterCard = (props) => {
       <div className={CSS["category-title"]}>Categories</div>
       <ul className={CSS["category-list"]}>
         {Category.map((value) => (
-          <li key={value._id} className={CSS["category-list-item"]}>
+          <li key={value.categoryName} className={CSS["category-list-item"]}>
             <input
               onClick={handleCategoryFilter}
               className={CSS["category-list-item-checkbox"]}
-              key={value._id}
               type="radio"
               value={value.categoryName}
-              name={"filter-value"}
+              name="filter-category"
             />
             {value.categoryName}
           </li>

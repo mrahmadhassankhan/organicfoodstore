@@ -8,9 +8,10 @@ const Category = () => {
   const [filterItems, setFilterItems] = useState([]);
   const [filterState, setFilterState] = useState(true);
   const [categoryFilter, setCategoryFilter] = useState("All");
-  const [priceFilter, setPriceFilter] = useState({ Min: 0, Max: 0 });
+  const [priceFilter, setPriceFilter] = useState({ Min: 0, Max: 50000 });
 
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     axios
       .get("http://localhost:1783/api/getproduct")
@@ -19,6 +20,7 @@ const Category = () => {
           a.productName.localeCompare(b.productName)
         );
         setProducts(sortedProducts);
+        setFilterItems(sortedProducts);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -31,7 +33,7 @@ const Category = () => {
 
   const hanldeFilterPrice = (priceMin, priceMax) => {
     setFilterState(false);
-    setPriceFilter(priceFilter);
+    setPriceFilter({ Min: priceMin, Max: priceMax });
     applyFilters(categoryFilter, priceMin, priceMax);
   };
 
@@ -40,11 +42,11 @@ const Category = () => {
 
     if (category !== "All") {
       filteredItems = filteredItems.filter((item) =>
-        item.productName.toLowerCase().includes(category.toLowerCase())
+        item.categoryName.toLowerCase().includes(category.toLowerCase())
       );
     }
 
-    if (priceMin !== 0 && priceMax !== 0) {
+    if (priceMin > 0 || priceMax < 50000) {
       filteredItems = filteredItems.filter(
         (item) => item.newPrice >= priceMin && item.newPrice <= priceMax
       );

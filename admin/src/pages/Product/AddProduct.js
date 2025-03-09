@@ -14,6 +14,22 @@ const AddProduct = () => {
   const [quantity, setQuantity] = useState();
   const [description, setDescription] = useState();
   const [productImagePreview, setProductImagePreview] = useState("");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:1783/api/getCategoryNames"
+        );
+        setCategories(response.data.categories);
+      } catch (err) {
+        toast.error("Error fetching categories");
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     if (productImage) {
@@ -23,6 +39,7 @@ const AddProduct = () => {
       return () => URL.revokeObjectURL(objecturl);
     }
   }, [productImage]);
+
   const handleAddProduct = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -57,16 +74,21 @@ const AddProduct = () => {
       <form encType="multipart/form-data" className={CSS["from-container"]}>
         <div>
           <div className={CSS["product-name-div"]}>
-            <label htmlFor="category-name">Category Name</label>
-            <input
+            <label htmlFor="category-name">Select Category</label>
+            <select
               required
-              type="text"
-              placeholder="Category Name"
               id="category-name"
               name="categoryName"
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
-            />
+            >
+              <option value="">Select a category</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category.categoryName}>
+                  {category.categoryName}
+                </option>
+              ))}
+            </select>
           </div>
           <div className={CSS["product-product-name-div"]}>
             <label htmlFor="product-name">Product Name</label>
@@ -135,7 +157,6 @@ const AddProduct = () => {
             <label htmlFor="product-img">Select Image</label>
             <input
               required
-              className=""
               type="file"
               name="productImage"
               id="product-img"
@@ -152,7 +173,7 @@ const AddProduct = () => {
         </div>
         <div>
           {productImagePreview && (
-            <img src={productImagePreview} width={300} height={300} />
+            <img src={productImagePreview} width={300} height={300} alt="" />
           )}
         </div>
         <ToastContainer />

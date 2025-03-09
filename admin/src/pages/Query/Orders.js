@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import GridLayout from "../../components/GridLayout";
 import CSS from "./Orders.module.css";
-import axios from 'axios';
+import axios from "axios";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -15,7 +15,11 @@ const Orders = () => {
     axios
       .get("http://localhost:1783/api/getorder")
       .then((res) => {
-        setOrders(res.data);
+        if (res.data) {
+          setOrders(res.data);
+        } else {
+          setOrders([]);
+        }
       })
       .catch((err) => console.error(err));
   };
@@ -33,7 +37,7 @@ const Orders = () => {
     <GridLayout>
       <h1 className={CSS["addproduct-title"]}>Orders List</h1>
       <input
-        className={CSS['input-search']}
+        className={CSS["input-search"]}
         type="text"
         placeholder="Search by name"
         value={searchValue}
@@ -51,7 +55,9 @@ const Orders = () => {
           {filteredOrders.map((order) => (
             <tr key={order._id}>
               <td className={CSS["table-data"]}>{order._id}</td>
-              <td className={CSS["table-data"]}>{order.firstname} {order.lastname}</td>
+              <td className={CSS["table-data"]}>
+                {order.firstname} {order.lastname}
+              </td>
               <td className={CSS["table-data"]}>{order.number}</td>
             </tr>
           ))}
